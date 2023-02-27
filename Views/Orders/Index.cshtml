@@ -1,0 +1,48 @@
+﻿@model IEnumerable<ASM21670.Models.Orders>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Order</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                ID User
+            </th>
+            <th>
+                Cart Item
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                Order Date
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CartItem)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Orderdate)
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger"><a class="text-white" asp-action="Delete" asp-route-id="@item.Id">Delete</a></button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

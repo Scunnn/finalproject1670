@@ -1,0 +1,27 @@
+﻿@model ASM21670.Models.Book
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 class="text-center">Details</h1>
+
+
+<div class="container border">
+    <div class="row p-4 mt-3 mb-3 text-center">
+        <div class="col">
+            <img src="@Html.DisplayFor(model => model.Image)" width="350" height="350" />
+        </div>
+        <div class="col">
+            <H1 class="text-danger">Title: @Html.DisplayFor(model => model.Title)</H1>
+            <h5 class="text-warning">Description: @Html.DisplayFor(model => model.Description)</h5>
+            <h5 class="text-warning">Category: @Html.DisplayFor(model => model.Category.Name)</h5>
+            <h5 class="text-warning">Author: @Html.DisplayFor(model => model.Author)</h5>
+            <h5 class="text-warning">Price:  @Html.DisplayFor(model => model.Price)</h5>
+            <button type="button" class="btn btn-warning"><a class="text-white" asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> </button>
+            <button type="button" class="btn btn-danger"><a class="text-white" asp-action="Delete" asp-route-id="@Model?.Id">Delete</a></button>
+            <p><button type="button" class="btn btn-success col-md-3 mt-3 text-white"><a asp-action="Index">Back to List</a></button></p>
+
+        </div>
+    </div>
+</div>

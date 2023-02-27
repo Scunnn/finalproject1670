@@ -1,0 +1,38 @@
+﻿@model IEnumerable<ASM21670.Models.Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-danger text-center">Category</h1>
+<a asp-action="Create"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPsH-kmHwy1iJgBeyrDPIRgPvkvh5MH1UMGg&usqp=CAU" height="30" width="30"></a>
+
+<table class="table table-warning mt-3">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success"><a class="text-white" asp-action="Details" asp-route-id="@item.Id">Detail</a> </button>
+                    <button type="button" class="btn btn-warning"><a class="text-white" asp-action="Edit" asp-route-id="@item.Id">Edit</a> </button>
+                    <button type="button" class="btn btn-danger"><a class="text-white" asp-action="Delete" asp-route-id="@item.Id">Delete</a></button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

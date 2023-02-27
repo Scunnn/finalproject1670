@@ -1,0 +1,121 @@
+﻿@using Newtonsoft.Json
+
+@{
+    var data = Context.Session.GetString("cart");
+
+    int coutCart = 0;
+    if (data == null)
+    {
+        coutCart = 0;
+    }
+    else
+    {
+        var data2 = Context.Session.GetString("cart");
+        List<Cart> dataCart = JsonConvert.DeserializeObject<List<Cart>>(data2);
+        foreach (var item in dataCart)
+        {
+            coutCart += item.Quantity;
+        }
+
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - BookStore</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/App.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container px-4 px-lg-5">
+                @*                <a class="navbar-brand" href="#!">Start Bootstrap</a>
+                *@  <a asp-area="" asp-controller="Home" asp-action="Index"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtltx2PY22K-uaeSa_BRc9j-uhgLwPqU2wIA&usqp=CAU" width="50" height="50"</a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="books" asp-action="Index">Book</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="orders" asp-action="Index">Order</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="books" asp-action="Index"> All Item</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="nav-link text-dark" asp-area="" asp-controller="categories" asp-action="Index"> Category</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <partial name="_LoginPartial" />
+                    <form class="d-flex">
+                        <i class="bi-cart-fill me-1"></i>
+                        <a asp-area=""
+                           asp-controller="Books"
+                           asp-action="ListCart">
+                            <img src="https://toppng.com/uploads/preview/shopping-cart-11530997216xsrc2jr32q.png" style="width:30px !important;height:30px;display:inline-block;" />
+                        </a>
+                        <span class="badge bg-dark text-white ms-1 rounded-pill">@coutCart</span>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg-dark" id="tempaltemo_footer">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-success border-bottom pb-3 border-light logo">FPT BOOK</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li>
+                            <i class="fas fa-map-marker-alt fa-fw"></i>
+                            FPT BOOK SIEU THU VI
+                        </li>
+                        <li>
+                            <i class="fa fa-phone fa-fw"></i>
+                            <a class="text-decoration-none" href="tel:010-020-0340">010-020-0340</a>
+                        </li>
+                        <li>
+                            <i class="fa fa-envelope fa-fw"></i>
+                            <a class="text-decoration-none" href="mailto:fptbook@company.com">fptbook@company.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 pt-5">
+                    <h2 class="h2 text-light border-bottom pb-3 border-light">Further Info</h2>
+                    <ul class="list-unstyled text-light footer-link-list">
+                        <li><a class="text-decoration-none" asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li><a class="text-decoration-none" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+
+</html>

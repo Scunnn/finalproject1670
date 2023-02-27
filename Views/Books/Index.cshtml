@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ASM21670.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<form class="d-flex mb-3 mt-3">
+    <button class="btn btn-outline-success" type="submit">
+        <i class="bi-cart-fill me-1"></i>
+        <a asp-action="Create">Create New</a>
+    </button>
+</form>
+<h1 class="text-center text-success">Products</h1>
+@using (Html.BeginForm())
+{
+    <p>
+        Name: @Html.TextBox("SearchString") <input type="submit" value="Tìm kiếm" />
+    </p>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="card col-md-3 m-4 mt-1">
+            <h4>@item.Title</h4>
+            <p>
+                <a asp-action="Details" asp-route-id="@item.Id"> <img class="card-img-top" src="@item.Image" width="100" height="300" /></a>
+            </p>
+            <p>
+                <h5>Price: @item.Price</h5>
+            </p>
+            <p>
+                <a class="btn btn-primary" asp-controller="Books" asp-action="addCart" asp-route-id="@item.Id">Add to cart</a>
+                <button type="button" class="btn btn-warning"><a class="text-white" asp-action="Edit" asp-route-id="@item.Id">Edit</a> </button>
+                <button type="button" class="btn btn-danger"><a class="text-white" asp-action="Delete" asp-route-id="@item.Id">Delete</a></button>
+            </p>
+        </div>
+    }
+
+</div>
+
+
+
+
